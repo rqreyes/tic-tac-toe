@@ -14,5 +14,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "homepage": "http://rqreyes.com/pocket-projects/react/01-tic-tac-toe"
 }
