@@ -58,3 +58,8 @@ h2 {
 .status {
 	text-align: center;
 }
+
+.reset {
+	display: block;
+	margin: 20px auto;
+}

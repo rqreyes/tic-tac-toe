@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
 	return (
-		<button className="square" onClick={() => props.onClick()}>
+		<button className='square' onClick={() => props.onClick()}>
 			{props.value}
 		</button>
 	);
@@ -15,20 +15,21 @@ class Board extends React.Component {
 		const squares = this.props.squares;
 		return <Square value={squares[i]} onClick={() => this.props.onClick(i)} />;
 	}
+	
 	render() {
 		return (
 			<div>
-				<div className="board-row">
+				<div className='board-row'>
 					{this.renderSquare(0)}
 					{this.renderSquare(1)}
 					{this.renderSquare(2)}
 				</div>
-				<div className="board-row">
+				<div className='board-row'>
 					{this.renderSquare(3)}
 					{this.renderSquare(4)}
 					{this.renderSquare(5)}
 				</div>
-				<div className="board-row">
+				<div className='board-row'>
 					{this.renderSquare(6)}
 					{this.renderSquare(7)}
 					{this.renderSquare(8)}
@@ -48,7 +49,13 @@ class Game extends React.Component {
 			stepNumber: 0,
 			xIsNext: true,
 		};
+		this.baseState = this.state;
 	}
+
+	reset = () => {
+		this.setState(this.baseState);
+	}
+
 	handleClick(i) {
 		const history = this.state.history.slice(0, this.state.stepNumber + 1);
 		const current = history[history.length - 1];
@@ -68,12 +75,14 @@ class Game extends React.Component {
 			xIsNext: !this.state.xIsNext,
 		});
 	}
+
 	jumpTo(step) {
 		this.setState({
 			stepNumber: step,
 			xIsNext: (step % 2) ? false : true,
 		});
 	}
+
 	render() {
 		const history = this.state.history;
 		const current = history[this.state.stepNumber];
@@ -92,7 +101,7 @@ class Game extends React.Component {
 				'Move #0';
 			return (
 				<li key={move}>
-					<a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+					<a href='#' onClick={() => this.jumpTo(move)}>{desc}</a>
 				</li>
 			);
 		});
@@ -100,19 +109,20 @@ class Game extends React.Component {
 		return (
 			<div>
 				<h1>Tic-Tac-Toe</h1>
-				<div className="status"><p>{status}</p></div>
-				<div className="game">
+				<div className='status'><p>{status}</p></div>
+				<div className='game'>
 					<div>
 						<Board
 							squares={current.squares}
 							onClick={(i) => this.handleClick(i)}
 						/>
 					</div>
-					<div className="game-info">
+					<div className='game-info'>
 						<h2>History</h2>
 						<ul>{moves}</ul>
 					</div>
 				</div>
+				<button className='reset' onClick={this.reset}>Reset</button>
 			</div>
 		);
 	}
